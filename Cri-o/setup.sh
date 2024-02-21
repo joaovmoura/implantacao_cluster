@@ -1,28 +1,29 @@
-# ----- Adicionando o repositório do Docker e instalando pré-requisitos -----
+# ----- Adicionando o repositório do CRI-O e instalando pré-requisitos -----
 
 sudo apt-get update
-sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+sudo apt-get install -y apt-transport-https software-properties-common
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_$(lsb_release -rs)/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
+
+curl -fsSL https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_$(lsb_release -rs)/Release.key | gpg --dearmor -o /usr/share/keyrings/devel:kubic:libcontainers:stable.gpg
 
 sudo apt-get update
 
-# ----- Instalação do Docker -----
+# ----- Instalação do CRI-O -----
 
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+sudo apt-get install -y cri-o
 
-# ----- Configuração do Docker -----
+# ----- Configuração do CRI-O -----
 
-# Adicionando o usuário atual ao grupo docker para evitar usar sudo
-sudo usermod -aG docker $USER
+# Adicionando o usuário atual ao grupo cri-o para evitar usar sudo
+sudo usermod -aG cri-o $USER
 
-# Reiniciando o Docker para aplicar as configurações
-sudo systemctl restart docker
+# Reiniciando o CRI-O para aplicar as configurações
+sudo systemctl restart crio
 
 # ----- Configuração dos parâmetros do sysctl -----
 
-# Configurando os parâmetros do sysctl para o Docker
+# Configurando os parâmetros do sysctl para o CRI-O
 echo "net.bridge.bridge-nf-call-iptables = 1" | sudo tee -a /etc/sysctl.conf
 echo "net.ipv4.ip_forward = 1" | sudo tee -a /etc/sysctl.conf
 
