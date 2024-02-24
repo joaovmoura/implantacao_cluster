@@ -13,3 +13,18 @@ Testando implantação de cluster com múltiplos container runtimes.
     `chmod +x setup.sh`
 - Execute:
     `./setup.sh`
+
+- Para iniciar o cluster faça:
+    ```bash
+    kubeadm init
+    ```
+- Após a inicialização, para configurar o kubectl, faça:
+    ```bash
+    mkdir -p $HOME/.kube
+    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    ```
+- Use o comando abaixo para obter o comando de join, que será usado no worker node:
+    ```bash
+    kubeadm token create --print-join-command
+    ```
