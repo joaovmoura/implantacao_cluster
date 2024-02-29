@@ -28,3 +28,7 @@ Testando implantação de cluster com múltiplos container runtimes.
     ```bash
     kubeadm token create --print-join-command
     ```
+- Após realizar o join, é possível alterar a role do nó fazendo:
+    ```bash
+    kubectl label node <NOME DO NÓ> node-role.kubernetes.io/worker=worker
+    ```
