@@ -12,10 +12,9 @@
 
   sudo apt-get install curl
 
-# Instalação do kubernetes
+# Instalação do e configuração do kubernetes
 
   sudo apt-get update
-# apt-transport-https may be a dummy package; if so, you can skip that package
   
   sudo apt-get install -y apt-transport-https ca-certificates curl
 
