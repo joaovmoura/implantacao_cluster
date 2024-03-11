@@ -32,3 +32,5 @@ Testando implantação de cluster com múltiplos container runtimes.
     ```bash
     kubectl label node <NOME DO NÓ> node-role.kubernetes.io/worker=worker
     ```
+## Problemas
+Atualmente, um pacote referente ao ubuntu xenial parece ter sido desativado. Atualizei o script de instalção do Docker usando a documentação oficial para resolver isso e parece ter funcionado. No entanto, nos meus testes, o cluster caiu repetidas vezes. Então uma possível solução é usar o script do snap.
